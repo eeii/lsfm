@@ -277,9 +277,6 @@ def main(a):
             for i, (id_, path) in enumerate(id_path_pairs, 1)
         )
 
-    print('\n\n****** 1. INITIAL PCA + PRUNE **********\n')
-    pca_and_prune(r, verbose=verbose)
-
 
 if __name__ == "__main__":
     main(docopt(__doc__))
