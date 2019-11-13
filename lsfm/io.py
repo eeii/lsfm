@@ -90,6 +90,8 @@ def import_shape_nicp(r, id_):
 
 def export_shape_nicp(r, id_, mesh):
     export_pickle(mesh.as_vector(), path_shape_nicp(r, id_), overwrite=True)
+    m3io.export_mesh(mesh, r / 'shape_nicp' / '{}.obj'.format(id_),
+            overwrite=True)
 
 
 def paths_shape_nicp(r):
