@@ -23,8 +23,9 @@ def load_detector():
 
 
 def align_mesh_to_template(source, target, scale_corrective=1.2):
-    scale = Scale((target.norm() / source.norm()) * scale_corrective,
-                  n_dims=target.n_dims)
+    scale = Scale((target.norm() / np.sqrt(target.n_points) /
+        source.norm() * np.sqrt(source.n_points)) * scale_corrective,
+        n_dims=target.n_dims)
     translation = Translation(target.centre() - source.centre())
     return translation.compose_before(scale)
 
