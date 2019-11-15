@@ -43,6 +43,7 @@ from collections import OrderedDict
 from pathlib import Path
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),'..'))
+import time
 
 from joblib import Parallel, delayed
 from matplotlib import pyplot as plt
@@ -257,6 +258,8 @@ def main(a):
     # 1. Bring meshes into dense correspondence
     id_path_pairs = list(ids_to_paths.items())
 
+    t0 = time.time()
+
     if not verbose and n_processes == 1:
         # We aren't outputting a lot of content per-subject, and we aren't
         # operating in parallel - so display a nice progress bar
@@ -277,6 +280,9 @@ def main(a):
                 i, len(id_path_pairs), r, id_, path, verbose=verbose)
             for i, (id_, path) in enumerate(id_path_pairs, 1)
         )
+
+    t1 = time.time()
+    print('Time used: {}'.format(t1 - t0))
 
 
 if __name__ == "__main__":
