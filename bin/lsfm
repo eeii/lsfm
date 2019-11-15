@@ -91,8 +91,6 @@ def correspond_and_save(r, id_, path, verbose=False):
         return
     lio.export_shape_nicp(r, id_, c['shape_nicp'])
     lio.export_landmark_visualization(r, id_, c['landmarked_image'])
-    lio.export_shape_nicp_visualization(r, id_,
-                                        c['shape_nicp_visualization'])
 
 
 def pca_and_prune(r, verbose=False, prune_count=None, prune_percent=0.98):

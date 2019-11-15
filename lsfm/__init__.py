@@ -18,7 +18,5 @@ def landmark_and_correspond_mesh(mesh, verbose=False):
                                       verbose=verbose),
         'landmarked_image': lms['landmarked_image']
     }
-    return_dict['shape_nicp_visualization'] = visualize_nicp_result(
-        return_dict['shape_nicp'])
 
     return return_dict
