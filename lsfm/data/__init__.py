@@ -5,6 +5,7 @@ import lsfm.io as lio
 from menpo.transform import Translation, Scale
 import numpy as np
 from functools import lru_cache
+import menpo3d.io as m3io
 
 DATA_DIR = Path(abspath(__file__)).parent
 
@@ -56,3 +57,17 @@ def load_template():
 
 def save_template(template, overwrite=False):
     lio.export_pickle(template, path_to_template(), overwrite=overwrite)
+    m3io.export_landmark_file(template.landmarks['ibug68'],
+            DATA_DIR.joinpath(path_to_template().stem + '-ibug68.ljson'),
+            overwrite=overwrite)
+    m3io.export_landmark_file(template.landmarks['nosetip'],
+            DATA_DIR.joinpath(path_to_template().stem + '-nosetip.ljson'),
+            overwrite=overwrite)
+    if hasattr(template, "texture"):
+        m3io.export_textured_mesh(template,
+                path_to_template().with_suffix('.obj'),
+                texture_extension='.png', overwrite=overwrite)
+    else:
+        m3io.export_mesh(template,
+                path_to_template().with_suffix('.obj'),
+                overwrite=overwrite)

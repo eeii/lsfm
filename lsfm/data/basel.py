@@ -30,7 +30,20 @@ def generate_template_from_basel_and_metadata(basel, meta):
 
 
 def save_template_from_basel(path):
+    if True:
+        save_customize_template_from_basel(path)
+        return
     basel = load_mean_from_basel(path)
     meta = load_basel_template_metadata()
     template = generate_template_from_basel_and_metadata(basel, meta)
+    save_template(template, overwrite=True)
+
+def save_customize_template_from_basel(path):
+    import menpo3d.io as m3io
+    import lsfm
+    template = m3io.import_mesh(path)
+    # lsfm.landmark.landmark_template(template, verbose=True)
+    meta = load_basel_template_metadata()
+    template.landmarks['ibug68'] = meta['landmarks']['ibug68']
+    template.landmarks['nosetip'] = meta['landmarks']['nosetip']
     save_template(template, overwrite=True)
