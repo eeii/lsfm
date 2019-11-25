@@ -45,6 +45,8 @@ def landmark_mesh(mesh, img_shape=(320, 240), verbose=False):
     shape_img = rasterize_shape_image_from_barycentric_coordinate_images(
         mesh, *bcs)
     # 2. Find the one bounding box in the rendered image
+    img = img.clip_pixels(maximum=1)
+    img = img.extract_channels([0, 1, 2])
     bboxes = detector(img)
     if len(bboxes) != 1:
         raise ValueError(
